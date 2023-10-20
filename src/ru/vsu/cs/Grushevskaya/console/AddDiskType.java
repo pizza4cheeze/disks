@@ -10,10 +10,20 @@ public class AddDiskType extends ConsoleScanner {
         super(scanner);
     }
 
+    private static AddDiskType example;
+
+    public static AddDiskType getExample(Scanner scanner) {
+        if (example == null) {
+            example = new AddDiskType(scanner);
+        }
+        return example;
+    }
+
     @Override
     public void process() {
+        scanner.nextLine();
         System.out.println("Input new type");
-        db.createDiskType(new DiskType(scanner.nextLine()));
+        diskTypes.createDiskType(new DiskType(scanner.nextLine()));
         System.out.println("success");
 
     }

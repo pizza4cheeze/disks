@@ -1,26 +1,36 @@
 package ru.vsu.cs.Grushevskaya.console;
 
-import ru.vsu.cs.Grushevskaya.base.Database;
-import ru.vsu.cs.Grushevskaya.base.DatabaseMemory;
+import ru.vsu.cs.Grushevskaya.base.services.CategoryServiceImpl;
+import ru.vsu.cs.Grushevskaya.base.services.DCEServiceImpl;
+import ru.vsu.cs.Grushevskaya.base.services.DiskServiceImpl;
+import ru.vsu.cs.Grushevskaya.base.services.DiskTypeServiceImpl;
 import ru.vsu.cs.Grushevskaya.generator.Generator;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Database database = DatabaseMemory.getExample();
-        Generator generator = new Generator(database);
+        //Database database = DatabaseMemory.getExample();
+
+        final DiskServiceImpl diskService = DiskServiceImpl.getExample();
+        final DiskTypeServiceImpl diskTypeService = DiskTypeServiceImpl.getExample();
+        final CategoryServiceImpl categoryService = CategoryServiceImpl.getExample();
+        final DCEServiceImpl dceService = DCEServiceImpl.getExample();
+        Generator generator = new Generator(diskService, diskTypeService, categoryService, dceService);
         generator.generate();
 
         Scanner scanner = new Scanner(System.in);
         ConsoleScanner[] commands = new ConsoleScanner[]{
-                new AddDisk(scanner),
-                new AddDiskType(scanner),
-                new AddCategory(scanner),
-                new PrintBase(scanner),
+                AddDisk.getExample(scanner),
+                AddDiskType.getExample(scanner),
+                AddCategory.getExample(scanner),
+                DeleteDisk.getExample(scanner),
+                DeleteDiskType.getExample(scanner),
+                DeleteCategory.getExample(scanner),
+                PrintBase.getExample(scanner),
         };
 
-        // commands[commands.length-1].process();
+        commands[commands.length-1].process();
 
         while (true) {
             for (int i = 0; i < commands.length; i++) {
