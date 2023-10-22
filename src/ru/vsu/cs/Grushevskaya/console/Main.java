@@ -27,6 +27,9 @@ public class Main {
                 DeleteDisk.getExample(scanner),
                 DeleteDiskType.getExample(scanner),
                 DeleteCategory.getExample(scanner),
+                UpdateDisk.getExample(scanner),
+                UpdateDiskType.getExample(scanner),
+                UpdateCategory.getExample(scanner),
                 PrintBase.getExample(scanner),
         };
 
